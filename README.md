@@ -6,12 +6,12 @@ Pause the game and choose **CHEATS** (works with a controller), or press **F1** 
 
 | Tab | Cheats |
 |---|---|
-| Player | God Mode (F2), Auto Repair, Infinite Air Jumps (F3), All Abilities, Move Speed ×1–3, Jump Power ×1–2 |
-| Combat | No Overheat (F6), Rapid Attack, Damage ×1–10 |
+| Player | God Mode, Auto Repair, Infinite Air Jumps, All Abilities, Move Speed ×1–3, Jump Power ×1–2 |
+| Combat | No Overheat, Rapid Attack, Damage ×1–10 |
 | World | Game Speed ×1–3, Full Repair, Vent Heat |
 
 - Toggles and slider values persist in `BepInEx/config/dev.haikucheats.cfg`.
-- Hotkeys can be rebound in the same file.
+- The F1 menu key can be rebound in the same file.
 - "All Abilities" and "Infinite Air Jumps" never write to your save.
 
 Some enemies (e.g. the Disruptor and drill boss parts) lose a fixed 1 HP per hit, so the damage multiplier doesn't affect them.

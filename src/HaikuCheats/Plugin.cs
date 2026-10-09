@@ -32,10 +32,6 @@ namespace HaikuCheats
         {
             if (Cheats.MenuKey.Value.IsDown()) menu.Toggle();
 
-            foreach (var t in Cheats.Toggles)
-                if (t.Hotkey.Value.MainKey != KeyCode.None && t.Hotkey.Value.IsDown())
-                    SetToggle(t, !t.On());
-
             menu.Update();
             PauseCheats.Update();
             ApplyGameSpeed();

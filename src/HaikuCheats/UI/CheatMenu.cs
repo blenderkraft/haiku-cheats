@@ -185,8 +185,7 @@ namespace HaikuCheats
             bool on = tc.On();
             DrawRowBg(r, tc, alpha, on);
 
-            string key = tc.Hotkey.Value.MainKey != KeyCode.None ? $"  <color=#5E7A7E><size=11>[{tc.Hotkey.Value}]</size></color>" : "";
-            Theme.Print(new Rect(r.x + 16f, r.y + 6f, r.width - 100f, 24f), tc.Name.ToUpperInvariant() + key, Theme.Label, Theme.A(on ? Theme.Text : Theme.Dim, alpha));
+            Theme.Print(new Rect(r.x + 16f, r.y + 6f, r.width - 100f, 24f), tc.Name.ToUpperInvariant(), Theme.Label, Theme.A(on ? Theme.Text : Theme.Dim, alpha));
             Theme.Print(new Rect(r.x + 16f, r.y + 28f, r.width - 100f, 18f), tc.Description, Theme.Small, Theme.A(Theme.Dim, alpha * 0.9f));
 
             // Switch

@@ -13,7 +13,6 @@ namespace HaikuCheats
         public string HudTag;
         public Tab Tab;
         public ConfigEntry<bool> Enabled;
-        public ConfigEntry<KeyboardShortcut> Hotkey;
     }
 
     internal sealed class SliderCheat
@@ -54,15 +53,15 @@ namespace HaikuCheats
             MenuKey = cfg.Bind("General", "MenuKey", new KeyboardShortcut(KeyCode.F1), "Opens and closes the cheat menu.");
             ShowHud = cfg.Bind("General", "ShowHud", true, "Show the active-cheats badge while the menu is closed.");
 
-            GodMode = Toggle(cfg, Tab.Player, "God Mode", "GOD", "Take no damage from anything.", KeyCode.F2);
-            AutoRepair = Toggle(cfg, Tab.Player, "Auto Repair", "REPAIR", "Health instantly refills to max.", KeyCode.None);
-            InfiniteJumps = Toggle(cfg, Tab.Player, "Infinite Air Jumps", "JUMPS", "Double jump forever, even before you've earned it.", KeyCode.F3);
-            AllAbilities = Toggle(cfg, Tab.Player, "All Abilities", "ABIL", "Temporarily grants every movement ability. Not saved.", KeyCode.None);
+            GodMode = Toggle(cfg, Tab.Player, "God Mode", "GOD", "Take no damage from anything.");
+            AutoRepair = Toggle(cfg, Tab.Player, "Auto Repair", "REPAIR", "Health instantly refills to max.");
+            InfiniteJumps = Toggle(cfg, Tab.Player, "Infinite Air Jumps", "JUMPS", "Double jump forever, even before you've earned it.");
+            AllAbilities = Toggle(cfg, Tab.Player, "All Abilities", "ABIL", "Temporarily grants every movement ability. Not saved.");
             MoveSpeed = Slider(cfg, Tab.Player, "Move Speed", "SPD", "Run speed multiplier.", 1f, 3f, 0.1f);
             JumpHeight = Slider(cfg, Tab.Player, "Jump Power", "JMP", "Jump force multiplier.", 1f, 2f, 0.05f);
 
-            InfiniteHeat = Toggle(cfg, Tab.Combat, "No Overheat", "COOL", "Abilities never build heat.", KeyCode.F6);
-            RapidAttack = Toggle(cfg, Tab.Combat, "Rapid Attack", "RAPID", "Remove the sword swing cooldown.", KeyCode.None);
+            InfiniteHeat = Toggle(cfg, Tab.Combat, "No Overheat", "COOL", "Abilities never build heat.");
+            RapidAttack = Toggle(cfg, Tab.Combat, "Rapid Attack", "RAPID", "Remove the sword swing cooldown.");
             DamageMult = Slider(cfg, Tab.Combat, "Damage", "DMG", "Outgoing damage multiplier.", 1f, 10f, 0.5f);
 
             GameSpeed = Slider(cfg, Tab.World, "Game Speed", "TIME", "Turbo the whole game.", 1f, 3f, 0.1f);
@@ -70,14 +69,13 @@ namespace HaikuCheats
             Actions.Add(new ActionCheat { Tab = Tab.World, Name = "Vent Heat", ButtonLabel = "VENT", Description = "Instantly cool the heat gauge.", Run = GameActions.VentHeat });
         }
 
-        private static ToggleCheat Toggle(ConfigFile cfg, Tab tab, string name, string tag, string desc, KeyCode key)
+        private static ToggleCheat Toggle(ConfigFile cfg, Tab tab, string name, string tag, string desc)
         {
             var section = "Cheats." + tab;
             var t = new ToggleCheat
             {
                 Name = name, HudTag = tag, Description = desc, Tab = tab,
                 Enabled = cfg.Bind(section, name, false, desc),
-                Hotkey = cfg.Bind("Hotkeys", name, key == KeyCode.None ? KeyboardShortcut.Empty : new KeyboardShortcut(key), "Quick toggle for " + name + "."),
             };
             Toggles.Add(t);
             return t;
