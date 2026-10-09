@@ -4,6 +4,12 @@ Haiku Cheats is an in-game cheat menu for **Haiku, the Robot** (single-player). 
 
 Pause the game and choose **CHEATS** (works with a controller), or press **F1** for the quick overlay.
 
+![Pause menu with the CHEATS entry](docs/screenshots/pause-menu.jpg)
+
+| Player cheats | Combat & world cheats |
+|---|---|
+| ![Cheats page: player section](docs/screenshots/cheats-player.jpg) | ![Cheats page: combat and world sections](docs/screenshots/cheats-combat-world.jpg) |
+
 | Tab | Cheats |
 |---|---|
 | Player | God Mode, Auto Repair, Infinite Air Jumps, All Abilities, Move Speed ×1–3, Jump Power ×1–2 |
