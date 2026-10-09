@@ -37,6 +37,7 @@ namespace HaikuCheats
                     SetToggle(t, !t.On());
 
             menu.Update();
+            PauseCheats.Update();
             ApplyGameSpeed();
         }
 

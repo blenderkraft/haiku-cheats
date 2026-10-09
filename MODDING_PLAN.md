@@ -33,3 +33,10 @@
 2. The double-jump input buffer lasts about 0.1 s, so resetting `hasDoubleJumped` on every frame spams jumps. Only reset it when Jump is pressed.
 3. `PlayerScript.Update` re-enables the colliders and `BetterJumping` every frame, so fly mode has to win in a postfix.
 4. Menu input blocking uses Rewired `Player.isPlaying = false`. The game ignores the legacy Input API except for one debug key.
+
+## Pause menu integration
+- `CameraBehavior.pauseUI` is a uGUI panel on a pixel-scale canvas (about 384×216 units at 1080p). Buttons are 80×16 at y=+1 (Resume) and y=-16 (Quit), with explicit navigation. The font is Jaldi-Regular at size 8, colour (1, .925, .839).
+- `RewiredStandaloneInputModule` drives selection. The game's arrow cursor follows any button that carries `MoveCursorOnSelect`, so clones of `quitButton` get the cursor for free.
+- `UICancel` / `ClosePanel` call `CameraBehavior.ResumeHideUI`. That method is prefixed so B on the cheats page goes back to the pause menu instead of unpausing.
+- The `TranslateText` component on button labels overwrites `text` with a localisation lookup in `Start`. Destroy it on clones.
+- Gotcha: a size-8 Jaldi `Text` vanishes entirely in a rect shorter than about 15 units, because vertical overflow is set to Truncate. Use 16-unit rows or Overflow.
