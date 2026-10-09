@@ -11,12 +11,11 @@ namespace HaikuCheats.Patches
     /// Scales damage the player deals. Enemies, bosses, doors and switches each implement
     /// IDamageable.TakeDamage (sword) and/or INonSwordDmg.TakeNonSwordDamage (bombs, orbs, trails),
     /// so we patch every implementation instead of the attack code paths.
+    /// Some enemies (e.g. Disruptor, drill boss parts) ignore the amount and lose 1 HP per hit; they are unaffected.
     /// </summary>
     [HarmonyPatch]
     internal static class DamagePatch
     {
-        private const int OneHitDamage = 99999;
-
         private static IEnumerable<MethodBase> TargetMethods()
         {
             var asm = typeof(IDamageable).Assembly;
@@ -40,9 +39,7 @@ namespace HaikuCheats.Patches
         private static void Prefix(object[] __args)
         {
             if (!(__args[0] is int dmg) || dmg <= 0) return;
-            if (Cheats.OneHitKill.On())
-                __args[0] = OneHitDamage;
-            else if (Cheats.DamageMult.IsActive)
+            if (Cheats.DamageMult.IsActive)
                 __args[0] = Mathf.Max(1, Mathf.RoundToInt(dmg * Cheats.DamageMult.Value.Value));
         }
     }

@@ -42,7 +42,7 @@ namespace HaikuCheats
         public static ConfigEntry<KeyboardShortcut> MenuKey;
         public static ConfigEntry<bool> ShowHud;
 
-        public static ToggleCheat GodMode, AutoRepair, InfiniteHeat, InfiniteJumps, Fly, AllAbilities, OneHitKill, RapidAttack;
+        public static ToggleCheat GodMode, AutoRepair, InfiniteHeat, InfiniteJumps, AllAbilities, RapidAttack;
         public static SliderCheat MoveSpeed, JumpHeight, DamageMult, GameSpeed;
 
         public static readonly List<ToggleCheat> Toggles = new List<ToggleCheat>();
@@ -57,18 +57,15 @@ namespace HaikuCheats
             GodMode = Toggle(cfg, Tab.Player, "God Mode", "GOD", "Take no damage from anything.", KeyCode.F2);
             AutoRepair = Toggle(cfg, Tab.Player, "Auto Repair", "REPAIR", "Health instantly refills to max.", KeyCode.None);
             InfiniteJumps = Toggle(cfg, Tab.Player, "Infinite Air Jumps", "JUMPS", "Double jump forever, even before you've earned it.", KeyCode.F3);
-            Fly = Toggle(cfg, Tab.Player, "Fly / Noclip", "FLY", "Free flight through walls. Move with the stick or arrows.", KeyCode.F4);
             AllAbilities = Toggle(cfg, Tab.Player, "All Abilities", "ABIL", "Temporarily grants every movement ability. Not saved.", KeyCode.None);
             MoveSpeed = Slider(cfg, Tab.Player, "Move Speed", "SPD", "Run speed multiplier.", 1f, 3f, 0.1f);
             JumpHeight = Slider(cfg, Tab.Player, "Jump Power", "JMP", "Jump force multiplier.", 1f, 2f, 0.05f);
 
-            OneHitKill = Toggle(cfg, Tab.Combat, "One-Hit Kills", "1HK", "Every hit destroys enemies and bosses.", KeyCode.F5);
             InfiniteHeat = Toggle(cfg, Tab.Combat, "No Overheat", "COOL", "Abilities never build heat.", KeyCode.F6);
             RapidAttack = Toggle(cfg, Tab.Combat, "Rapid Attack", "RAPID", "Remove the sword swing cooldown.", KeyCode.None);
             DamageMult = Slider(cfg, Tab.Combat, "Damage", "DMG", "Outgoing damage multiplier.", 1f, 10f, 0.5f);
 
             GameSpeed = Slider(cfg, Tab.World, "Game Speed", "TIME", "Turbo the whole game.", 1f, 3f, 0.1f);
-            Actions.Add(new ActionCheat { Tab = Tab.World, Name = "Spare Parts", ButtonLabel = "+1000", Description = "Adds 1000 spare parts (saved with your game).", Run = GameActions.GiveParts });
             Actions.Add(new ActionCheat { Tab = Tab.World, Name = "Full Repair", ButtonLabel = "REPAIR", Description = "Restore health to max right now.", Run = GameActions.FullRepair });
             Actions.Add(new ActionCheat { Tab = Tab.World, Name = "Vent Heat", ButtonLabel = "VENT", Description = "Instantly cool the heat gauge.", Run = GameActions.VentHeat });
         }

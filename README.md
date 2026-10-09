@@ -2,17 +2,19 @@
 
 Haiku Cheats is an in-game cheat menu for **Haiku, the Robot** (single-player). It is a BepInEx 5 plugin with a CRT-terminal style overlay.
 
-Press **F1** in game to open the menu.
+Pause the game and choose **CHEATS** (works with a controller), or press **F1** for the quick overlay.
 
 | Tab | Cheats |
 |---|---|
-| Player | God Mode (F2), Auto Repair, Infinite Air Jumps (F3), Fly / Noclip (F4), All Abilities, Move Speed ×1–3, Jump Power ×1–2 |
-| Combat | One-Hit Kills (F5), No Overheat (F6), Rapid Attack, Damage ×1–10 |
-| World | Game Speed ×1–3, +1000 Spare Parts, Full Repair, Vent Heat |
+| Player | God Mode (F2), Auto Repair, Infinite Air Jumps (F3), All Abilities, Move Speed ×1–3, Jump Power ×1–2 |
+| Combat | No Overheat (F6), Rapid Attack, Damage ×1–10 |
+| World | Game Speed ×1–3, Full Repair, Vent Heat |
 
 - Toggles and slider values persist in `BepInEx/config/dev.haikucheats.cfg`.
 - Hotkeys can be rebound in the same file.
-- "All Abilities" and "Infinite Air Jumps" never write to your save. Spare parts you add *are* saved.
+- "All Abilities" and "Infinite Air Jumps" never write to your save.
+
+Some enemies (e.g. the Disruptor and drill boss parts) lose a fixed 1 HP per hit, so the damage multiplier doesn't affect them.
 
 ## Install (Linux / Proton)
 1. Download [BepInEx 5 win_x64](https://github.com/BepInEx/BepInEx/releases) and extract it into the game folder.

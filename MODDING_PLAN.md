@@ -22,10 +22,8 @@
 | All abilities | The `GameManager.can*` flags are overridden inside `PlayerScript.Update` only, then restored, so they are never saved. |
 | Move speed | `PlayerScript.Walk`: `speed` is scaled for the call, then restored. |
 | Jump power | `PlayerScript.Jump(Vector2)`: `jumpForce` is scaled for the call, then restored. Wall jumps and pogo jumps also route through it. |
-| Fly / noclip | `PlayerScript.FixedUpdate` postfix sets velocity from `dirRaw` with gravityScale 0. The Update postfix disables `boxColl`, `circleColl` and `BetterJumping`. |
 | Rapid attack | Private `PlayerScript.nextAttackTime` is set to 0 before Update. |
-| Damage / one-hit kill | Every `IDamageable.TakeDamage` and `INonSwordDmg.TakeNonSwordDamage` implementation is patched (about 100 methods), with `__args[0]` scaled. |
-| Spare parts | `InventoryManager.AddSpareParts(int)`. |
+| Damage multiplier | Every `IDamageable.TakeDamage` and `INonSwordDmg.TakeNonSwordDamage` implementation is patched (about 100 methods), with `__args[0]` scaled. |
 | Game speed | `Time.timeScale`, applied only while the game is at 1.0. `TimeManager.TriggerSlowMo` fades the time scale back to 1 using unscaled time. |
 
 ## Gotchas
@@ -40,3 +38,6 @@
 - `UICancel` / `ClosePanel` call `CameraBehavior.ResumeHideUI`. That method is prefixed so B on the cheats page goes back to the pause menu instead of unpausing.
 - The `TranslateText` component on button labels overwrites `text` with a localisation lookup in `Start`. Destroy it on clones.
 - Gotcha: a size-8 Jaldi `Text` vanishes entirely in a rect shorter than about 15 units, because vertical overflow is set to Truncate. Use 16-unit rows or Overflow.
+
+- One-hit kills were dropped. About 30 `TakeDamage` implementations ignore the amount. Most are props, but enemies such as `Disruptor` (`health--`) and `DrillBodyPart` count hits, so no single patch can kill them in one hit.
+- Fly/noclip and +1000 spare parts were removed at the user's request.

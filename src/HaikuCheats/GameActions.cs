@@ -7,13 +7,6 @@ namespace HaikuCheats
     {
         public static bool InGameplay => PlayerScript.instance != null && PlayerHealth.instance != null && GameManager.instance != null;
 
-        public static void GiveParts()
-        {
-            if (!InGameplay || InventoryManager.instance == null) { Toasts.Show("Load a save first", Toasts.Warn); return; }
-            InventoryManager.instance.AddSpareParts(1000);
-            Toasts.Show("+1000 SPARE PARTS", Toasts.Amber);
-        }
-
         public static void FullRepair()
         {
             if (!InGameplay) { Toasts.Show("Load a save first", Toasts.Warn); return; }

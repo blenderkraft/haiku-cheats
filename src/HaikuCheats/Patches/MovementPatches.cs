@@ -8,11 +8,6 @@ namespace HaikuCheats.Patches
     {
         private static readonly AccessTools.FieldRef<PlayerScript, float> NextAttackTime =
             AccessTools.FieldRefAccess<PlayerScript, float>("nextAttackTime");
-        private static readonly AccessTools.FieldRef<PlayerScript, Vector2> DirRaw =
-            AccessTools.FieldRefAccess<PlayerScript, Vector2>("dirRaw");
-
-        private const float DefaultGravity = 3f; // PlayerScript.CancelGrapple restores this value
-        private static bool flyWasOn;
 
         /// <summary>GameManager ability flags as they were before we overrode them for one Update.</summary>
         internal struct AbilityState
@@ -59,52 +54,13 @@ namespace HaikuCheats.Patches
                     NextAttackTime(__instance) = 0f;
             }
 
-            private static void Postfix(PlayerScript __instance, AbilityState __state)
+            private static void Postfix(AbilityState __state)
             {
                 var gm = GameManager.instance;
-                if (__state.Overridden && gm != null)
-                {
-                    gm.canDoubleJump = __state.DoubleJump; gm.canWallJump = __state.WallJump; gm.canDash = __state.Dash;
-                    gm.canRoll = __state.Roll; gm.canBomb = __state.Bomb; gm.canGrapple = __state.Grapple;
-                    gm.canHeal = __state.Heal; gm.canAttackDown = __state.AttackDown;
-                }
-
-                // Update re-enables the colliders and BetterJumping every frame, so fly mode must win after it.
-                if (Cheats.Fly.On())
-                {
-                    __instance.boxColl.enabled = false;
-                    __instance.circleColl.enabled = false;
-                    var bj = __instance.GetComponent<BetterJumping>();
-                    if (bj != null) bj.enabled = false;
-                }
-            }
-        }
-
-        [HarmonyPatch(typeof(PlayerScript), "FixedUpdate")]
-        private static class PlayerFixedUpdate
-        {
-            private static void Postfix(PlayerScript __instance)
-            {
-                var rb = __instance.rb;
-                if (rb == null) return;
-
-                if (Cheats.Fly.On())
-                {
-                    flyWasOn = true;
-                    if (rb.bodyType != RigidbodyType2D.Dynamic || __instance.disableControls) return;
-                    rb.gravityScale = 0f;
-                    float flySpeed = __instance.speed * 1.6f * Cheats.MoveSpeed.Value.Value;
-                    rb.velocity = DirRaw(__instance) * flySpeed;
-                }
-                else if (flyWasOn)
-                {
-                    flyWasOn = false;
-                    rb.gravityScale = DefaultGravity;
-                    __instance.boxColl.enabled = !__instance.isRolling;
-                    __instance.circleColl.enabled = __instance.isRolling;
-                    var bj = __instance.GetComponent<BetterJumping>();
-                    if (bj != null) bj.enabled = true;
-                }
+                if (!__state.Overridden || gm == null) return;
+                gm.canDoubleJump = __state.DoubleJump; gm.canWallJump = __state.WallJump; gm.canDash = __state.Dash;
+                gm.canRoll = __state.Roll; gm.canBomb = __state.Bomb; gm.canGrapple = __state.Grapple;
+                gm.canHeal = __state.Heal; gm.canAttackDown = __state.AttackDown;
             }
         }
 
